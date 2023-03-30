@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.Filter;
 
 public class Plant {
     public static ArrayList<Plant> plants = new ArrayList<>();
@@ -108,6 +110,16 @@ public class Plant {
         }
     }
 
+    public static void Info() {
+        System.out.println("1. Pamatyti augalų sąrašą");
+        System.out.println("2. Filtruoti  augalų sąrašą");
+        System.out.println("3. Pridėti augalą");
+        System.out.println("4. Redaguoti augalą");
+        System.out.println("5. Ištrinti augalą");
+        System.out.println("6. Išeiti iš programos");
+    }
+
+
     public static void addPlants(Scanner sc) {
         Plant plants = new Plant();
         System.out.println("iveskite Augalo pavadinimą");
@@ -166,7 +178,81 @@ public class Plant {
             }
         }
     }
+
+    public static void filter() {
+        System.out.println("Pasirinkite pagal kuri lauką norite redaguoti");
+        System.out.println("1 Pagal Pavadinimą");
+        System.out.println("2. Pagal Lotynišką pavadinimą");
+        System.out.println("3. Pagal augalo kontinenta ");
+        System.out.println("4. Pagal tai at augalas valgomas (taip) arba nevalgomas (ne)");
+        int input = sc.nextInt();
+        sc.nextLine();
+        switch (input) {
+            case 1:
+                filterByName();
+                break;
+
+            case 2:
+                FilterByLatinName();
+                break;
+            case 3:
+               FilterByContinent();
+                break;
+            case 4:
+                FilterByEdibleInedible();
+                break;
+
+        }
+
+    }
+
+    public static void filterByName(){
+        System.out.println("įveskite augalo pavadinimą arba pavadinimo fragmenta");
+        String input = sc.nextLine().toLowerCase();
+        for (int i = 0; i <plants.size(); i++) {
+            if (plants.get(i).title.toLowerCase().contains(input)){
+                System.out.println(plants.get(i));
+            }
+
+        }
+    }
+
+    public static void FilterByLatinName() {
+        System.out.println("įveskite augalo pavadinimą Lotyniškai arba pavadinimo fragmenta");
+        String input = sc.nextLine().toLowerCase();
+        for (int i = 0; i < plants.size(); i++) {
+            if (plants.get(i).titleLatin.toLowerCase().contains(input)) {
+                System.out.println(plants.get(i));
+
+            }
+        }
+    }
+    public static void FilterByContinent() {
+        System.out.println("įveskite augalo continentą  ");
+        String input = sc.nextLine().toLowerCase();
+        for (int i = 0; i < plants.size(); i++) {
+            if (plants.get(i).plantContinent.toLowerCase().contains(input)) {
+                System.out.println(plants.get(i));
+
+            }
+        }
+    }
+    public static void FilterByEdibleInedible() {
+        System.out.println("įveskite ar augalas valgomas - True arba nevalgomas - false:" );
+        boolean input = sc.nextBoolean();
+        sc.nextLine();
+        for (int i = 0; i < plants.size(); i++) {
+            if (plants.get(i).edibleInedible == input) {
+                System.out.println(plants.get(i));
+
+            }
+        }
+    }
+
 }
+
+
+
 
 
 
